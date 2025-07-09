@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/redhox/k8s.git
     targetRevision: HEAD
-    path: dev
+    path: application_test/dev
   destination: 
     server: https://kubernetes.default.svc
     namespace: myapp
