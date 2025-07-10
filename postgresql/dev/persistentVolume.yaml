@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: jenkins-volume
+  name: postgres-volume
 spec:
   capacity:
-    storage: 4Gi
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -13,3 +13,16 @@ spec:
     driver: driver.longhorn.io
     volumeHandle: dijigue 
     fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+  volumeName: postgres-volume
+  storageClassName: longhorn
