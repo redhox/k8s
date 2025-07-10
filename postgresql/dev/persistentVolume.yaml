@@ -18,6 +18,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-claim
+  namespace: postgres
 spec:
   accessModes:
     - ReadWriteOnce
