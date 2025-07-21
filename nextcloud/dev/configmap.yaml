@@ -13,8 +13,8 @@ data:
       ),
       'dbtype' => 'pgsql',
       'dbname' => 'nextcloud',
-      'dbhost' => '192.168.1.241:5432',
-      'dbuser' => 'nextcloud',
+      'dbhost' => getenv('POSTGRES_HOST'),
+      'dbuser' => getenv('POSTGRES_USER'),
       'dbpassword' => getenv('POSTGRES_PASSWORD'),
       'installed' => true,
       'objectstore' => array(
