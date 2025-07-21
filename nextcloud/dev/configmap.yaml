@@ -14,7 +14,7 @@ data:
       'dbtype' => 'pgsql',
       'dbname' => 'nextcloud',
       'dbhost' => getenv('POSTGRES_HOST'),
-      'dbuser' => getenv('POSTGRES_USER'),
+      'dbuser' => 'myuser',
       'dbpassword' => getenv('POSTGRES_PASSWORD'),
       'installed' => true,
       'objectstore' => array(
