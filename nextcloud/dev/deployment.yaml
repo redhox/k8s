@@ -75,6 +75,6 @@ spec:
         - name: nextcloud-storage
           persistentVolumeClaim:
             claimName: nextcloud-pvc
-        - name: configmap-config
+        - name: nextcloud-config
           configMap:
             name: nextcloud-config
