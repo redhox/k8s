@@ -7,6 +7,10 @@ data:
     <?php
     $CONFIG = array (
       'overwrite.cli.url' => 'http://cloud.local.co',
+      'trusted_domains' =>
+      array (
+        0 => 'cloud.local.co',
+      ),
       'dbtype' => 'pgsql',
       'dbname' => 'nextcloud',
       'dbhost' => 'postgres-service',
