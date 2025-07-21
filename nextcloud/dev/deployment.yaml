@@ -21,14 +21,20 @@ spec:
             - name: POSTGRES_HOST
               value: "postgres-service"
             - name: POSTGRES_DB
-              value: "nextcloud"
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_DB
             - name: POSTGRES_USER
-              value: "nextcloud"
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: nextcloud-secret
-                  key: db-password
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
 
             - name: NEXTCLOUD_ADMIN_USER
               value: "admin"
@@ -36,21 +42,24 @@ spec:
               value: "adminpassword"
 
             - name: OBJECTSTORE_S3_BUCKET
-              value: "nom-du-bucket"
+              valueFrom:
+                secretKeyRef:
+                  name: bucket-secret
+                  key: BUCKET_NAME
             - name: OBJECTSTORE_S3_KEY
               valueFrom:
                 secretKeyRef:
-                  name: nextcloud-secret
-                  key: s3-access-key
+                  name: bucket-secret
+                  key: AWS_ACCESS_KEY_ID
             - name: OBJECTSTORE_S3_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: nextcloud-secret
-                  key: s3-secret-key
+                  name: bucket-secret
+                  key: AWS_SECRET_ACCESS_KEY
             - name: OBJECTSTORE_S3_REGION
               value: "us-east-1"
             - name: OBJECTSTORE_S3_HOST
-              value: "s3.amazonaws.com"  # ou ton endpoint MinIO, Wasabi, etc.
+              value: "s3.amazonaws.com"
             - name: OBJECTSTORE_S3_PORT
               value: "443"
             - name: OBJECTSTORE_S3_SSL
