@@ -15,7 +15,7 @@ data:
       'dbname' => 'nextcloud',
       'dbhost' => '10.0.2.40:5432',
       'dbuser' => 'myuser',
-      'dbpassword' => getenv('POSTGRES_PASSWORD'),
+      'dbpassword' => 'mypassword',
       'installed' => true,
       'objectstore' => array(
         'class' => '\\OC\\Files\\ObjectStore\\S3',
