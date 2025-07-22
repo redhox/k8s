@@ -65,16 +65,22 @@ spec:
             postStart:
               exec:
                 command: ["/bin/sh", "-c", "cp /mnt/extra-config/custom.config.php /var/www/html/config/"]
-
           volumeMounts:
-            - name: nextcloud-storage
-              mountPath: /var/www/html
-
+            - name: nextcloud-data
+              mountPath: /var/www/html/data
+            - name: nextcloud-config-dir
+              mountPath: /var/www/html/config
+            - name: extra-config
+              mountPath: /mnt/extra-config
 
       volumes:
-        - name: nextcloud-storage
+        - name: nextcloud-data
           persistentVolumeClaim:
             claimName: nextcloud-pvc
-        - name: nextcloud-config
+        - name: nextcloud-config-dir
+          emptyDir: {}
+        - name: extra-config
           configMap:
             name: nextcloud-config
+   
+          
