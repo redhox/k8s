@@ -75,6 +75,7 @@ spec:
         - name: nextcloud-data
           persistentVolumeClaim:
             claimName: nextcloud-pvc
- 
-   
+        - name: extra-config
+          configMap:
+            name: nextcloud-config
           
