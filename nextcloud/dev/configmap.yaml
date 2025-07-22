@@ -10,6 +10,19 @@ data:
       array (
         0 => 'cloud.local.co',
       ),
+      'objectstore' => array(
+        'class' => '\\OC\\Files\\ObjectStore\\S3',
+        'arguments' => array(
+          'bucket' => 'api-label',
+          'autocreate' => true,
+          'key'    => 'syBoyd5pAPyCuTyZMaF6',
+          'secret' => '05BXJZaolvlbrPnHVyUO1DcWMzj58u3qFCky6mUc',
+          'region' => 'us-east-1',
+          'hostname' => 'bucket.morgan-coulm.fr',
+          'port' => 9000,
+          'use_ssl' => true,
+          'use_path_style' => true,
+        ),
     );
 
 
