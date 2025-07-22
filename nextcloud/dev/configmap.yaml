@@ -13,7 +13,7 @@ data:
       ),
       'dbtype' => 'pgsql',
       'dbname' => 'nextcloud',
-      'dbhost' => '10.0.2.40',
+      'dbhost' => 'http://10.0.2.40',
       'dbuser' => 'myuser',
       'dbpassword' => 'mypassword',
       'installed' => true,
