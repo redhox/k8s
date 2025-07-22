@@ -11,6 +11,11 @@ data:
         0 => 'cloud.local.co',
       ),
       'installed' => true,
+      'dbtype' => 'pgsql',
+      'dbname' => 'nextcloud',
+      'dbhost' => '10.0.2.40:5432',
+      'dbuser' => 'myuser',
+      'dbpassword' => 'mypassword',
     );
 
 
