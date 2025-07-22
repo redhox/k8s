@@ -68,14 +68,13 @@ spec:
           volumeMounts:
             - name: nextcloud-data
               mountPath: /var/www/html/data
-            - name: nextcloud-config
+            - name: extra-config
               mountPath: /mnt/extra-config
-
-      volumes:
-        - name: nextcloud-data
-          persistentVolumeClaim:
-            claimName: nextcloud-pvc
-        - name: nextcloud-config
-          configMap:
-            name: nextcloud-config
-          
+    
+    volumes:
+      - name: nextcloud-data
+        persistentVolumeClaim:
+          claimName: nextcloud-pvc
+      - name: extra-config
+        configMap:
+          name: nextcloud-config
