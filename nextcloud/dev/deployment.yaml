@@ -67,7 +67,7 @@ spec:
               mountPath: /var/www/html
             - name: nextcloud-config
               mountPath: /var/www/html/config/custom.config.php
-              subPath: config.php
+              subPath: custom.config.php
       volumes:
         - name: nextcloud-storage
           persistentVolumeClaim:
