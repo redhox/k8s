@@ -35,10 +35,10 @@ spec:
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
 
-            - name: NEXTCLOUD_ADMIN_USER
-              value: "admin2"
-            - name: NEXTCLOUD_ADMIN_PASSWORD
-              value: "adminpassword"
+            # - name: NEXTCLOUD_ADMIN_USER
+            #   value: "admin2"
+            # - name: NEXTCLOUD_ADMIN_PASSWORD
+            #   value: "adminpassword"
 
             - name: OBJECTSTORE_S3_BUCKET
               valueFrom:
