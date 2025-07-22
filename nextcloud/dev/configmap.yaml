@@ -17,6 +17,5 @@ data:
       'dbuser' => 'myuser',
       'dbpassword' => 'mypassword',
       'installed' => true,
-      ),
     );
 
