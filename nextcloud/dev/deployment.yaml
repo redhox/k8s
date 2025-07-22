@@ -18,6 +18,8 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: NC_setup_create_db_user
+              value: "false"
             - name: POSTGRES_HOST
               value: "10.0.2.40:5432"
             - name: POSTGRES_DB
