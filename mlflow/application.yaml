@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nextcloud-argo-application
+  name: mlflow-argo-application
   namespace: argocd
 spec:
   project: default
@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/redhox/k8s.git
     targetRevision: HEAD
-    path: nextcloud/dev
+    path: mlflow/dev
   destination: 
     server: https://kubernetes.default.svc
     namespace: postgresql
