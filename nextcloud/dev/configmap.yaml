@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: nextcloud-config
 data:
-  config.php: |
+  custom.config.php: |
     <?php
     $CONFIG = array (
       'overwrite.cli.url' => 'http://cloud.local.co',
