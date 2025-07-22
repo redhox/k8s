@@ -6,9 +6,6 @@ data:
   custom.config.php: |
     <?php
     $CONFIG = array (
-      'instanceid' => 'oc' . substr(md5(uniqid()), 0, 10),
-      'passwordsalt' => 'Y2FzZSB5b3UgbmVlZCBvbmU=', // remplace avec un vrai sel
-      'secret' => 'VGhpcyBpcyBhIHZlcnkgc2VjcmV0IHN0cmluZy4=', // remplace avec un vrai secret
       'trusted_domains' =>
       array (
         0 => 'cloud.local.co',
