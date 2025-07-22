@@ -3,19 +3,12 @@ kind: ConfigMap
 metadata:
   name: nextcloud-config
 data:
-  custom.config.php: |
+  config.php: |
     <?php
     $CONFIG = array (
-      'overwrite.cli.url' => 'http://cloud.local.co',
       'trusted_domains' =>
       array (
         0 => 'cloud.local.co',
       ),
-      'dbtype' => 'pgsql',
-      'dbname' => 'nextcloud',
-      'dbhost' => '10.0.2.40:5432',
-      'dbuser' => 'myuser',
-      'dbpassword' => 'mypassword',
-      'installed' => true
-    );
+
 
