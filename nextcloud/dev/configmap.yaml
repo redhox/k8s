@@ -22,10 +22,10 @@ data:
         'arguments' => array(
           'bucket' => 'api-label',
           'autocreate' => true,
-          'key'    => getenv('OBJECTSTORE_S3_KEY'),
-          'secret' => getenv('OBJECTSTORE_S3_SECRET'),
+          'key'    => 'syBoyd5pAPyCuTyZMaF6',
+          'secret' => '05BXJZaolvlbrPnHVyUO1DcWMzj58u3qFCky6mUc',
           'region' => 'us-east-1',
-          'hostname' => 'https://bucket.morgan-coulm.fr',
+          'hostname' => 'bucket.morgan-coulm.fr',
           'port' => 9000,
           'use_ssl' => true,
           'use_path_style' => true,
