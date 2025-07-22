@@ -28,6 +28,11 @@ spec:
           ports:
             - containerPort: 5000
           env:
+            - name: MLFLOW_FLASK_SERVER_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mlflow-secret
+                  key: MLFLOW_FLASK_SERVER_SECRET_KEY
             - name: POSTGRES_HOST
               value: "10.0.2.40:5432"
             - name: POSTGRES_DB
