@@ -68,9 +68,11 @@ spec:
                   - /bin/sh
                   - -c
                   - |
-                    if [ -f /mnt/extra-config/custom.config.php ]; then
-                      cp /mnt/extra-config/custom.config.php /var/www/html/config/
-                    fi
+                    while [ ! -d /var/www/html/config ]; do
+                      echo "Waiting for /var/www/html/config to be available..."
+                      sleep 1
+                    done
+                    cp /mnt/extra-config/custom.config.php /var/www/html/config/
 
           volumeMounts:
             - name: nextcloud-data
