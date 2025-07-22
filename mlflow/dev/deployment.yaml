@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+        - name: mlflow
+          image: coulm/mlflow:3.1.1
+          command: ["mlflow", "server"]
+          args:
+            - "--app-name"
+            - "basic-auth"
+            - "--backend-store-uri"
+            - "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST)/$(POSTGRES_DB)"
+            - "--default-artifact-root"
+            - "s3://api-label/mlflow"
+            - "--host"
+            - "0.0.0.0"
+          ports:
+            - containerPort: 5000
+          ports:
+            - containerPort: 80
+          env:
+            - name: POSTGRES_HOST
+              value: "10.0.2.40:5432"
+            - name: POSTGRES_DB
+              value: "mlflow"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: OBJECTSTORE_S3_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: bucket-secret
+                  key: BUCKET_NAME
+            - name: OBJECTSTORE_S3_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bucket-secret
+                  key: AWS_ACCESS_KEY_ID
+            - name: OBJECTSTORE_S3_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: bucket-secret
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: OBJECTSTORE_S3_REGION
+              value: "us-east-1"
+            - name: OBJECTSTORE_S3_HOST
+              value: "s3.amazonaws.com"
+            - name: OBJECTSTORE_S3_PORT
+              value: "443"
+            - name: OBJECTSTORE_S3_SSL
+              value: "true"
+            
