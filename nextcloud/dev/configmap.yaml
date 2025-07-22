@@ -23,6 +23,7 @@ data:
           'use_ssl' => true,
           'use_path_style' => true,
         ),
+      ),
     );
 
 
