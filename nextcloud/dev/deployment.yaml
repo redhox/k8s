@@ -61,13 +61,15 @@ spec:
               value: "443"
             - name: OBJECTSTORE_S3_SSL
               value: "true"
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "cp /mnt/extra-config/custom.config.php /var/www/html/config/"]
 
           volumeMounts:
             - name: nextcloud-storage
               mountPath: /var/www/html
-            - name: nextcloud-config
-              mountPath: /var/www/html/config/custom.config.php
-              subPath: custom.config.php
+
 
       volumes:
         - name: nextcloud-storage
