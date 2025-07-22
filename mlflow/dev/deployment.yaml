@@ -27,8 +27,6 @@ spec:
             - "0.0.0.0"
           ports:
             - containerPort: 5000
-          ports:
-            - containerPort: 80
           env:
             - name: POSTGRES_HOST
               value: "10.0.2.40:5432"
