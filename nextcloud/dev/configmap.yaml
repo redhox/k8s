@@ -10,7 +10,7 @@ data:
       array (
         0 => 'cloud.local.co',
       ),
-      secret => 'kjnvzmernvonrvoiznrvo',
+      'secret' => 'kjnvzmernvonrvoiznrvo',
       'datadirectory' => '/var/www/html/data',
       'dbtype' => 'pgsql',
       'dbname' => 'nextcloud',
