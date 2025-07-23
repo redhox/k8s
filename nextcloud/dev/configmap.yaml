@@ -18,6 +18,20 @@ data:
       'dbuser' => 'myuser',
       'dbpassword' => 'mypassword',
       'installed' => true,
+      'objectstore' => array(
+        'class' => '\\OC\\Files\\ObjectStore\\S3',
+        'arguments' => array(
+          'bucket' => 'perso',
+          'autocreate' => true,
+          'key'    => getenv('OBJECTSTORE_S3_KEY'),
+          'secret' => getenv('OBJECTSTORE_S3_SECRET'),
+          'region' => 'us-east-1',
+          'hostname' => 'bucket.morgan-coulm.fr',
+          'port' => 9000,
+          'use_ssl' => true,
+          'use_path_style' => true,
+        ),
+      ),
     );
 
 
