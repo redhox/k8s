@@ -11,6 +11,7 @@ data:
         0 => 'cloud.local.co',
       ),
       'secret' => 'kjnvzmernvonrvoiznrvo',
+      'passwordsalt' => 'zierivbipernvpizernvpijeazrnvpij',
       'datadirectory' => '/var/www/html/data',
       'dbtype' => 'pgsql',
       'dbname' => 'nextcloud',
