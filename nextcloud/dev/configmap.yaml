@@ -27,7 +27,7 @@ data:
           'secret' => getenv('OBJECTSTORE_S3_SECRET'),
           'region' => 'us-east-1',
           'host' => 'bucket.morgan-coulm.fr',
-          'port' => 9000,
+          'port' => 443,
           'use_ssl' => true,
           'use_path_style' => true,
         ),
