@@ -1,3 +1,9 @@
+persistence:
+  enabled: true
+  storageClass: longhorn
+  size: 5Gi
+  accessMode: ReadWriteOnce
+
 nextcloud:
   host: cloud.local.co
   username: admin
