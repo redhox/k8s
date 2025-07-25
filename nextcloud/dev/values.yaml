@@ -1,0 +1,62 @@
+nextcloud:
+  host: cloud.local.co
+  username: admin
+  password: admin
+  datadir: /var/www/html/data
+
+  extraEnv:
+    - name: "NC_primary_storage"
+      value: "s3"
+    - name: "S3_BUCKET"
+      value: "api-label"
+    - name: "S3_KEY"
+      valueFrom:
+        secretKeyRef:
+          name: bucket-secret
+          key: AWS_ACCESS_KEY_ID
+    - name: "S3_SECRET"
+      valueFrom:
+        secretKeyRef:
+          name: bucket-secret
+          key: AWS_SECRET_ACCESS_KEY
+    - name: "S3_HOST"
+      value: "bucket.morgan-coulm.fr"
+    - name: "S3_PORT"
+      value: "9000"
+    - name: "S3_SSL"
+      value: "true"
+    - name: "S3_USEPATH_STYLE"
+      value: "true"
+
+  configs:
+    s3.config.php: |
+      <?php
+      $CONFIG = array (
+        'objectstore' => [
+          'class' => '\\OC\\Files\\ObjectStore\\S3',
+          'arguments' => [
+            'bucket' => getenv('S3_BUCKET'),
+            'key'    => getenv('S3_KEY'),
+            'secret' => getenv('S3_SECRET'),
+            'hostname' => getenv('S3_HOST'),
+            'port' => (int)getenv('S3_PORT'),
+            'use_ssl' => getenv('S3_SSL') === 'true',
+            'use_path_style' => getenv('S3_USEPATH_STYLE') === 'true',
+            'region' => 'us-east-1',
+          ],
+        ],
+      );
+
+persistence:
+  enabled: false  # On désactive le volume local, car on utilise MinIO
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  hosts:
+    - host: cloud.local.co
+      paths:
+        - path: /
+          pathType: Prefix
