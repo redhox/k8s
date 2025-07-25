@@ -49,14 +49,5 @@ nextcloud:
 
 persistence:
   enabled: false  # On désactive le volume local, car on utilise MinIO
-
 ingress:
-  enabled: true
-  className: "nginx"
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-  hosts:
-    - host: cloud.local.co
-      paths:
-        - path: /
-          pathType: Prefix
+  enabled: false
