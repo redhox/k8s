@@ -1,6 +1,7 @@
 resources:
   - namespace.yaml
   - secrete.yaml
+  - ingress.yaml
 
 helmCharts:
   - name: nextcloud
