@@ -1,40 +1,40 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: nextcloud-config
-data:
-  custom.config.php: |
-    <?php
-    $CONFIG = array (
-      'trusted_domains' =>
-      array (
-        0 => 'cloud.local.co',
-      ),
-      'secret' => 'kjnvzmernvonrvoiznrvo',
-      'passwordsalt' => 'zierivbipernvpizernvpijeazrnvpij',
-      'datadirectory' => '/var/www/html/data',
-      'dbtype' => 'pgsql',
-      'dbname' => 'nextcloud',
-      'dbhost' => '10.0.2.40',
-      'dbport' => '5432',
-      'dbuser' => 'myuser',
-      'dbpassword' => 'mypassword',
-      'installed' => true,
-      'objectstore' => array(
-        'class' => '\\OC\\Files\\ObjectStore\\S3',
-        'arguments' => array(
-          'bucket' => 'perso',
-          'autocreate' => true,
-          'key'    => getenv('OBJECTSTORE_S3_KEY'),
-          'secret' => getenv('OBJECTSTORE_S3_SECRET'),
-          'region' => 'us-east-1',
-          'host' => 'bucket.morgan-coulm.fr',
-          'port' => 443,
-          'use_ssl' => true,
-          'use_path_style' => true,
-        ),
-      ),
-    );
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: nextcloud-config
+# data:
+#   custom.config.php: |
+#     <?php
+#     $CONFIG = array (
+#       'trusted_domains' =>
+#       array (
+#         0 => 'cloud.local.co',
+#       ),
+#       'secret' => 'kjnvzmernvonrvoiznrvo',
+#       'passwordsalt' => 'zierivbipernvpizernvpijeazrnvpij',
+#       'datadirectory' => '/var/www/html/data',
+#       'dbtype' => 'pgsql',
+#       'dbname' => 'nextcloud',
+#       'dbhost' => '10.0.2.40',
+#       'dbport' => '5432',
+#       'dbuser' => 'myuser',
+#       'dbpassword' => 'mypassword',
+#       'installed' => true,
+#       'objectstore' => array(
+#         'class' => '\\OC\\Files\\ObjectStore\\S3',
+#         'arguments' => array(
+#           'bucket' => 'perso',
+#           'autocreate' => true,
+#           'key'    => getenv('OBJECTSTORE_S3_KEY'),
+#           'secret' => getenv('OBJECTSTORE_S3_SECRET'),
+#           'region' => 'us-east-1',
+#           'host' => 'bucket.morgan-coulm.fr',
+#           'port' => 443,
+#           'use_ssl' => true,
+#           'use_path_style' => true,
+#         ),
+#       ),
+#     );
 
 
 
