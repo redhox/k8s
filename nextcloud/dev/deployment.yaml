@@ -1,94 +1,94 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nextcloud
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nextcloud
-  template:
-    metadata:
-      labels:
-        app: nextcloud
-    spec:
-      containers:
-        - name: nextcloud
-          image: lscr.io/linuxserver/nextcloud:latest
-          ports:
-            - containerPort: 80
-          env:
-            - name: NC_setup_create_db_user
-              value: "false"
-            - name: POSTGRES_HOST
-              value: "10.0.2.40:5432"
-            - name: POSTGRES_DB
-              value: "nextcloud"
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_PASSWORD
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: nextcloud
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: nextcloud
+#   template:
+#     metadata:
+#       labels:
+#         app: nextcloud
+#     spec:
+#       containers:
+#         - name: nextcloud
+#           image: lscr.io/linuxserver/nextcloud:latest
+#           ports:
+#             - containerPort: 80
+#           env:
+#             - name: NC_setup_create_db_user
+#               value: "false"
+#             - name: POSTGRES_HOST
+#               value: "10.0.2.40:5432"
+#             - name: POSTGRES_DB
+#               value: "nextcloud"
+#             - name: POSTGRES_USER
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: postgres-secret
+#                   key: POSTGRES_USER
+#             - name: POSTGRES_PASSWORD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: postgres-secret
+#                   key: POSTGRES_PASSWORD
 
-            # - name: NEXTCLOUD_ADMIN_USER
-            #   value: "admin2"
-            # - name: NEXTCLOUD_ADMIN_PASSWORD
-            #   value: "adminpassword"
+#             # - name: NEXTCLOUD_ADMIN_USER
+#             #   value: "admin2"
+#             # - name: NEXTCLOUD_ADMIN_PASSWORD
+#             #   value: "adminpassword"
 
-            - name: OBJECTSTORE_S3_BUCKET
-              valueFrom:
-                secretKeyRef:
-                  name: bucket-secret
-                  key: BUCKET_NAME
-            - name: OBJECTSTORE_S3_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: bucket-secret
-                  key: AWS_ACCESS_KEY_ID
-            - name: OBJECTSTORE_S3_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: bucket-secret
-                  key: AWS_SECRET_ACCESS_KEY
-            - name: OBJECTSTORE_S3_REGION
-              value: "us-east-1"
-            - name: OBJECTSTORE_S3_HOST
-              value: "bucket.morgan-coulm.fr"
-            - name: OBJECTSTORE_S3_PORT
-              value: "443"
-            - name: OBJECTSTORE_S3_SSL
-              value: "true"
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /bin/sh
-                  - -c
-                  - |
-                    while [ ! -d /var/www/html/config ]; do
-                      echo "Waiting for /var/www/html/config to be available..."
-                      sleep 1
-                    done
-                    cp /mnt/extra-config/custom.config.php /var/www/html/config/
+#             - name: OBJECTSTORE_S3_BUCKET
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: bucket-secret
+#                   key: BUCKET_NAME
+#             - name: OBJECTSTORE_S3_KEY
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: bucket-secret
+#                   key: AWS_ACCESS_KEY_ID
+#             - name: OBJECTSTORE_S3_SECRET
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: bucket-secret
+#                   key: AWS_SECRET_ACCESS_KEY
+#             - name: OBJECTSTORE_S3_REGION
+#               value: "us-east-1"
+#             - name: OBJECTSTORE_S3_HOST
+#               value: "bucket.morgan-coulm.fr"
+#             - name: OBJECTSTORE_S3_PORT
+#               value: "443"
+#             - name: OBJECTSTORE_S3_SSL
+#               value: "true"
+#           lifecycle:
+#             postStart:
+#               exec:
+#                 command:
+#                   - /bin/sh
+#                   - -c
+#                   - |
+#                     while [ ! -d /var/www/html/config ]; do
+#                       echo "Waiting for /var/www/html/config to be available..."
+#                       sleep 1
+#                     done
+#                     cp /mnt/extra-config/custom.config.php /var/www/html/config/
 
-          volumeMounts:
-            - name: nextcloud-data
-              mountPath: /var/www/html/data
-            - name: extra-config
-              mountPath: /mnt/extra-config
+#           volumeMounts:
+#             - name: nextcloud-data
+#               mountPath: /var/www/html/data
+#             - name: extra-config
+#               mountPath: /mnt/extra-config
 
 
 
             
-      volumes:
-        - name: nextcloud-data
-          persistentVolumeClaim:
-            claimName: nextcloud-pvc
-        - name: extra-config
-          configMap:
-            name: nextcloud-config
+#       volumes:
+#         - name: nextcloud-data
+#           persistentVolumeClaim:
+#             claimName: nextcloud-pvc
+#         - name: extra-config
+#           configMap:
+#             name: nextcloud-config
