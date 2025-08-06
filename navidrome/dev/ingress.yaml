@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: navidrome
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: navidrome.local.co
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: navidrome-service
+            port:
+              number: 80
