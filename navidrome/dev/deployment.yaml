@@ -27,6 +27,8 @@ spec:
               value: info
             - name: ND_SCANSCHEDULE
               value: "1h"
+            - name: ND_BASEURL
+              value: "/navidrome"
       volumes:
         - name: data
           persistentVolumeClaim:
