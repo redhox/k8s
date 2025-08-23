@@ -11,7 +11,7 @@ spec:
     http:
       paths:
       - path: /navidrome(/|$)(.*)
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: navidrome-service
