@@ -5,10 +5,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: navidrome.local.co
+  - host: k8s.morgan-coulm.fr
     http:
       paths:
-      - path: /
+      - path: /navidrome
         pathType: Prefix
         backend:
           service:
