@@ -63,19 +63,7 @@
 #               value: "443"
 #             - name: OBJECTSTORE_S3_SSL
 #               value: "true"
-#           lifecycle:
-#             postStart:
-#               exec:
-#                 command:
-#                   - /bin/sh
-#                   - -c
-#                   - |
-#                     while [ ! -d /var/www/html/config ]; do
-#                       echo "Waiting for /var/www/html/config to be available..."
-#                       sleep 1
-#                     done
-#                     cp /mnt/extra-config/custom.config.php /var/www/html/config/
-
+#         
 #           volumeMounts:
 #             - name: nextcloud-data
 #               mountPath: /var/www/html/data
