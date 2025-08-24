@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mlflow
-  annotaions:
+  annotations:
     ngnx.ingress.kubernertes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
