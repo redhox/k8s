@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: mlflow
   annotations:
-    ngnx.ingress.kubernertes.io/rewrite-target: /$2
+    nginx.ingress.kubernertes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
