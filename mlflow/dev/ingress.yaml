@@ -11,7 +11,7 @@ spec:
     http:
       paths:
       - path: /mlflow(/|$)(.*)
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: mlflow-service
