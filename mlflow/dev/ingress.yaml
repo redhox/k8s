@@ -10,7 +10,7 @@ spec:
   - host: test.morgan-coulm.fr
     http:
       paths:
-      - path: /mlflow(/|$)(.*)
+      - path: /mlflow/(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
