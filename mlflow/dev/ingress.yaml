@@ -3,14 +3,14 @@ kind: Ingress
 metadata:
   name: mlflow
   annotations:
-    ngnx.ingress.kubernertes.io/rewrite-target: /$2
+    ngnx.ingress.kubernertes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
   - host: test.morgan-coulm.fr
     http:
       paths:
-      - path: /mlflow(/|$)(.*)
+      - path: /mlflow
         pathType: Prefix
         backend:
           service:
