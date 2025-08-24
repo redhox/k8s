@@ -28,6 +28,8 @@ spec:
           ports:
             - containerPort: 5000
           env:
+            - name: MLFLOW_STATIC_PREFIX
+              value: /mlflow
             - name: MLFLOW_FLASK_SERVER_SECRET_KEY
               valueFrom:
                 secretKeyRef:
