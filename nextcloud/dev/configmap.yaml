@@ -8,7 +8,7 @@
 #     $CONFIG = array (
 #       'trusted_domains' =>
 #       array (
-#         0 => 'cloud.local.co',
+#         0 => 'test.morgan-coulm.fr/nextcloud',
 #       ),
 #       'secret' => 'kjnvzmernvonrvoiznrvo',
 #       'passwordsalt' => 'zierivbipernvpizernvpijeazrnvpij',
@@ -20,21 +20,7 @@
 #       'dbuser' => 'myuser',
 #       'dbpassword' => 'mypassword',
 #       'installed' => true,
-#       'objectstore' => array(
-#         'class' => '\\OC\\Files\\ObjectStore\\S3',
-#         'arguments' => array(
-#           'bucket' => 'perso',
-#           'autocreate' => true,
-#           'key'    => getenv('OBJECTSTORE_S3_KEY'),
-#           'secret' => getenv('OBJECTSTORE_S3_SECRET'),
-#           'region' => 'us-east-1',
-#           'host' => 'bucket.morgan-coulm.fr',
-#           'port' => 443,
-#           'use_ssl' => true,
-#           'use_path_style' => true,
-#         ),
-#       ),
-#     );
+#        );
 
 
 
