@@ -2,19 +2,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mlflow
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^/mlflow(/|$)(.*) /$2 break;
-    nginx.ingress.kubernetes.io/x-forwarded-prefix: /mlflow
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$2
+  #   nginx.ingress.kubernetes.io/configuration-snippet: |
+  #     rewrite ^/mlflow(/|$)(.*) /$2 break;
+  #   nginx.ingress.kubernetes.io/x-forwarded-prefix: /mlflow
 spec:
   ingressClassName: nginx
   rules:
   - host: test.morgan-coulm.fr
     http:
       paths:
-      - path: /mlflow(/|$)(.*)
-        pathType: ImplementationSpecific
+      - path: /mlflow
+        pathType: Prefix
         backend:
           service:
             name: mlflow-service
