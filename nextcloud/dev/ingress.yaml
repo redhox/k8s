@@ -8,7 +8,7 @@ spec:
   - host: cloud.local.co
     http:
       paths:
-      - path: /
+      - path: /nextcloud
         pathType: Prefix
         backend:
           service:
