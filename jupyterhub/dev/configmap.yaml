@@ -4,4 +4,4 @@ metadata:
   name: jupyterhub-config
 data:
   jupyterhub_config.py: |
-    c.JupyterHub.base_url = '/jupyter'
+    c.JupyterHub.base_url = '/jupyterhub'
