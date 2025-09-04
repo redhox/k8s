@@ -1,8 +1,7 @@
-volumeMounts:
-  - name: config-volume
-    mountPath: /srv/jupyterhub/jupyterhub_config.py
-    subPath: jupyterhub_config.py
-volumes:
-  - name: config-volume
-    configMap:
-      name: jupyterhub-config
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jupyterhub-config
+data:
+  jupyterhub_config.py: |
+    c.JupyterHub.base_url = '/jupyter'
