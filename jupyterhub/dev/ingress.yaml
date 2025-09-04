@@ -13,6 +13,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: jupyterhub
+                name: jupyterhub-service
                 port:
                   number: 80
