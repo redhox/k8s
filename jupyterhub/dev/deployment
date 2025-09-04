@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyterhub
+  labels:
+    app: jupyterhub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyterhub
+  template:
+    metadata:
+      labels:
+        app: jupyterhub
+    spec:
+      containers:
+        - name: jupyterhub
+          image: jupyterhub/jupyterhub:latest
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: jupyterhub-data
+              mountPath: /srv/jupyterhub
+      volumes:
+        - name: jupyterhub-data
+          persistentVolumeClaim:
+            claimName: jupyterhub-pvc
