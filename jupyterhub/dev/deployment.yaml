@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: jupyterhub
-          image: coulm/jupyterhub_arm:latest
+          image: coulm/jupyter_arm:latest
           ports:
             - containerPort: 8000
           env:
