@@ -25,7 +25,13 @@ spec:
           volumeMounts:
             - name: jupyterhub-data
               mountPath: /srv/jupyterhub
+            - name: jupyterhub-config-volume
+              mountPath: /srv/jupyterhub/jupyterhub_config.py
+              subPath: jupyterhub_config.py
       volumes:
         - name: jupyterhub-data
           persistentVolumeClaim:
             claimName: pvc-jupyterhub-data
+        - name: jupyterhub-config-volume
+          configMap:
+            name: jupyterhub-config
