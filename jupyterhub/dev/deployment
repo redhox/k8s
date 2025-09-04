@@ -25,4 +25,4 @@ spec:
       volumes:
         - name: jupyterhub-data
           persistentVolumeClaim:
-            claimName: jupyterhub-pvc
+            claimName: pvc-jupyterhub-data
