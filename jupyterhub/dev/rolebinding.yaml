@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: jupyterhub-rolebinding
+  namespace: postgresql
+subjects:
+  - kind: ServiceAccount
+    name: jupyterhub-sa
+    namespace: postgresql
+roleRef:
+  kind: Role
+  name: jupyterhub-role
+  apiGroup: rbac.authorization.k8s.io
