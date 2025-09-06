@@ -8,3 +8,7 @@ data:
     c.JupyterHub.authenticator_class = 'dummy'
     c.DummyAuthenticator.password = "test"  
     c.JupyterHub.admin_users = {'admin'} 
+    c.JupyterHub.spawner_class = 'kubespawner.KubeSpawner'
+    c.KubeSpawner.image = "jupyter/base-notebook:latest"
+    c.Spawner.default_url = '/lab'   
+    
