@@ -14,4 +14,9 @@ data:
     c.Spawner.http_timeout = 300
     c.Spawner.start_timeout = 300
     c.KubeSpawner.service_account = 'jupyterhub-sa'
-    c.KubeSpawner.args = ['--NotebookApp.base_url=/jupyterhub/user/{username}']
+    c.KubeSpawner.args = [
+        '--NotebookApp.base_url=/jupyterhub/user/{username}',
+        '--NotebookApp.token=""',
+        '--NotebookApp.password=""'
+    ]
+    c.KubeSpawner.port = 8888
