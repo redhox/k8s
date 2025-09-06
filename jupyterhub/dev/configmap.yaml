@@ -11,4 +11,5 @@ data:
     c.JupyterHub.spawner_class = 'kubespawner.KubeSpawner'
     c.KubeSpawner.image = "jupyter/base-notebook:latest"
     c.Spawner.default_url = '/lab'   
-    
+    c.Spawner.http_timeout = 300
+    c.Spawner.start_timeout = 300
