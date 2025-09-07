@@ -4,13 +4,18 @@ metadata:
   name: jupyterhub-config
 data:
   jupyterhub_config.py: |
+    # URL de base
     c.JupyterHub.base_url = '/jupyterhub'
+
+    # Authentification
     c.JupyterHub.authenticator_class = 'dummy'
     c.DummyAuthenticator.password = "test"  
-    c.JupyterHub.admin_users = {'admin'} 
+    c.JupyterHub.admin_users = {'admin'}
+
+    # Spawner
     c.JupyterHub.spawner_class = 'kubespawner.KubeSpawner'
     c.KubeSpawner.image = "jupyter/base-notebook:latest"
-    c.Spawner.default_url = '/lab'   
+    c.Spawner.default_url = '/lab'
     c.Spawner.http_timeout = 300
     c.Spawner.start_timeout = 300
     c.KubeSpawner.service_account = 'jupyterhub-sa'
@@ -21,3 +26,28 @@ data:
     ]
     c.KubeSpawner.port = 8888
     c.JupyterHub.hub_connect_url = 'http://jupyterhub.postgresql.svc.cluster.local:8081/jupyterhub/hub/'
+
+    # Persistance des données utilisateurs
+    c.KubeSpawner.volumes = [
+        {
+            'name': 'user-data',
+            'persistentVolumeClaim': {
+                'claimName': 'data-{username}'
+            }
+        }
+    ]
+    c.KubeSpawner.volume_mounts = [
+        {
+            'mountPath': '/home/jovyan',
+            'name': 'user-data'
+        }
+    ]
+
+    # Ressources par défaut
+    c.KubeSpawner.cpu_limit = 1
+    c.KubeSpawner.mem_limit = '2G'
+    c.KubeSpawner.cpu_guarantee = 0.5
+    c.KubeSpawner.mem_guarantee = '1G'
+
+    # Debug
+    c.Application.log_level = 'DEBUG'
