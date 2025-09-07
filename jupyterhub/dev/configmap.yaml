@@ -20,3 +20,4 @@ data:
         '--NotebookApp.password=""'
     ]
     c.KubeSpawner.port = 8888
+    c.JupyterHub.hub_connect_url = 'http://jupyterhub.postgresql.svc.cluster.local:8081/jupyterhub/hub/'
