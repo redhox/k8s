@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mlflow
+  namespace: mlflow
+  labels:
+    app: mlflow
 spec:
   replicas: 1
   selector:
@@ -14,62 +17,13 @@ spec:
     spec:
       containers:
         - name: mlflow
-          image: coulm/mlflow_arm:3.1.1
-          command: ["mlflow", "server"]
-          args:
-            - "--app-name"
-            - "basic-auth"
-            - "--backend-store-uri"
-            - "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST)/$(POSTGRES_DB)"
-            - "--default-artifact-root"
-            - "s3://api-label/mlflow"
-            - "--host"
-            - "0.0.0.0"
+          image: ghcr.io/mlflow/mlflow:v2.10.2
+          command:
+            - sh
+            - -c
+            - "mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri $MLFLOW_BACKEND_STORE_URI --default-artifact-root $MLFLOW_DEFAULT_ARTIFACT_ROOT"
+          envFrom:
+            - secretRef:
+                name: mlflow-managed-secret
           ports:
             - containerPort: 5000
-          env:
-            - name: MLFLOW_STATIC_PREFIX
-              value: /mlflow
-            - name: MLFLOW_FLASK_SERVER_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: mlflow-secret
-                  key: MLFLOW_FLASK_SERVER_SECRET_KEY
-            - name: POSTGRES_HOST
-              value: "10.0.2.238:5432"
-            - name: POSTGRES_DB
-              value: "mlflow"
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_PASSWORD
-            - name: OBJECTSTORE_S3_BUCKET
-              valueFrom:
-                secretKeyRef:
-                  name: bucket-secret
-                  key: BUCKET_NAME
-            - name: OBJECTSTORE_S3_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: bucket-secret
-                  key: AWS_ACCESS_KEY_ID
-            - name: OBJECTSTORE_S3_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: bucket-secret
-                  key: AWS_SECRET_ACCESS_KEY
-            - name: OBJECTSTORE_S3_REGION
-              value: "us-east-1"
-            - name: OBJECTSTORE_S3_HOST
-              value: "s3.amazonaws.com"
-            - name: OBJECTSTORE_S3_PORT
-              value: "443"
-            - name: OBJECTSTORE_S3_SSL
-              value: "true"
-            
