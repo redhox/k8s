@@ -21,7 +21,7 @@ spec:
           command:
             - sh
             - -c
-            - "pip install psycopg2-binary && mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri $MLFLOW_BACKEND_STORE_URI --default-artifact-root $MLFLOW_DEFAULT_ARTIFACT_ROOT --app-name basic-auth"
+            - "pip install psycopg2-binary \"mlflow[auth]\" && mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri $MLFLOW_BACKEND_STORE_URI --default-artifact-root $MLFLOW_DEFAULT_ARTIFACT_ROOT --app-name basic-auth"
           envFrom:
             - secretRef:
                 name: mlflow-managed-secret
