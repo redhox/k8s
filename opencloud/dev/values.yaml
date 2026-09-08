@@ -1,0 +1,36 @@
+global:
+  domain:
+    opencloud: cloud.example.com
+    keycloak: keycloak.example.com
+
+opencloud:
+  enabled: true
+  replicas: 1
+
+  # Le stockage utilisateur est dans RustFS
+  storage:
+    mode: s3
+
+    s3:
+      internal:
+        enabled: false
+
+      external:
+        enabled: true
+        endpoint: "https://bucket.morgan-coulm.fr"
+        region: "us-east-1"
+
+        existingSecret: "opencloud-s3"
+
+        bucket: "opencloud"
+        createBucket: false
+
+  # Pour commencer simplement
+  persistence:
+    enabled: true
+
+  # À adapter à ton domaine
+  adminPassword: ""
+
+  # Pas besoin de déployer MinIO
+  # puisqu'on utilise RustFS.
