@@ -1,13 +1,27 @@
 global:
   domain:
-    opencloud: cloud.example.com
-    keycloak: keycloak.example.com
+    opencloud: cloud.morgan-coulm.fr
+
+  tls:
+    enabled: false
 
 opencloud:
   enabled: true
   replicas: 1
 
-  # Le stockage utilisateur est dans RustFS
+  existingSecret: opencloud-admin
+
+  createDemoUsers: false
+
+  persistence:
+    config:
+      enabled: true
+      size: 5Gi
+
+    data:
+      enabled: true
+      size: 30Gi
+
   storage:
     mode: s3
 
@@ -20,17 +34,20 @@ opencloud:
         endpoint: "https://bucket.morgan-coulm.fr"
         region: "us-east-1"
 
-        existingSecret: "opencloud-s3"
+        existingSecret: opencloud-s3
 
         bucket: "opencloud"
         createBucket: false
 
-  # Pour commencer simplement
-  persistence:
+keycloak:
+  internal:
     enabled: true
+    existingSecret: opencloud-keycloak
 
-  # À adapter à ton domaine
-  adminPassword: ""
+postgres:
+  enabled: true
+  existingSecret: opencloud-postgres
 
-  # Pas besoin de déployer MinIO
-  # puisqu'on utilise RustFS.
+ingress:
+  enabled: true
+  ingressClassName: nginx
