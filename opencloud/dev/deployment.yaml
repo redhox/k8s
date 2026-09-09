@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: opencloud
+  namespace: opencloud
+
+  labels:
+    app: opencloud
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: opencloud
+
+  template:
+    metadata:
+      labels:
+        app: opencloud
+
+    spec:
+      containers:
+        - name: opencloud
+
+          image: opencloudeu/opencloud-rolling:7.4.0
+          imagePullPolicy: IfNotPresent
+
+          command:
+            - /bin/sh
+            - -c
+
+          args:
+            - |
+              opencloud init || true
+              exec opencloud server
+
+          envFrom:
+            - secretRef:
+                name: opencloud-managed-secret
+
+          env:
+            - name: OC_URL
+              value: "https://cloud.morgan-coulm.fr"
+
+            - name: OC_INSECURE
+              value: "false"
+
+            - name: OC_LOG_LEVEL
+              value: "info"
+
+            - name: PROXY_HTTP_ADDR
+              value: "0.0.0.0:9200"
+
+            - name: IDM_CREATE_DEMO_USERS
+              value: "false"
+
+            - name: STORAGE_USERS_DRIVER
+              value: "decomposeds3"
+
+            - name: STORAGE_USERS_DECOMPOSEDS3_ENDPOINT
+              value: "https://bucket.morgan-coulm.fr"
+
+            - name: STORAGE_USERS_DECOMPOSEDS3_REGION
+              value: "us-east-1"
+
+            - name: STORAGE_USERS_DECOMPOSEDS3_BUCKET
+              value: "opencloud"
+
+            - name: STORAGE_USERS_DECOMPOSEDS3_ROOT
+              value: "/var/lib/opencloud/storage/users"
+
+          ports:
+            - name: http
+              containerPort: 9200
+              protocol: TCP
+
+          volumeMounts:
+            - name: opencloud-data
+              mountPath: /etc/opencloud
+
+            - name: opencloud-data
+              mountPath: /var/lib/opencloud
+
+      volumes:
+        - name: opencloud-data
+          persistentVolumeClaim:
+            claimName: opencloud-data
