@@ -1,0 +1,27 @@
+apiVersion: secrets.infisical.com/v1beta1
+kind: InfisicalConnection
+metadata:
+  name: infisical
+  namespace: infisical-operator
+spec:
+  address: http://infisical-backend.infisical.svc.cluster.local:8080
+---
+apiVersion: secrets.infisical.com/v1beta1
+kind: InfisicalAuth
+metadata:
+  name: infisical-auth
+  namespace: infisical-operator
+spec:
+  infisicalConnectionRef:
+    name: infisical
+    namespace: infisical-operator
+  method: universal
+  universal:
+    clientIdRef:
+      name: infisical-credentials
+      namespace: infisical-operator
+      key: clientId
+    clientSecretRef:
+      name: infisical-credentials
+      namespace: infisical-operator
+      key: clientSecret

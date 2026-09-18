@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - list:
+        elements:
+          - app: mlflow
+            namespace: mlflow
+            path: mlflow/dev
+          - app: opencloud
+            namespace: opencloud
+            path: opencloud/dev
+  template:
+    metadata:
+      name: '{{.app}}-dev'
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/redhox/k8s.git'
+        targetRevision: main
+        path: '{{.path}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{.namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
